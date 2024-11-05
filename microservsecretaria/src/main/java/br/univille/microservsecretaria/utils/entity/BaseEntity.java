@@ -7,10 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import com.azure.spring.data.cosmos.core.mapping.Container;
-
-@Container(containerName = "BaseEntity")
-public class BaseEntity {
+public abstract class BaseEntity {
     
     @Id
     private String id;

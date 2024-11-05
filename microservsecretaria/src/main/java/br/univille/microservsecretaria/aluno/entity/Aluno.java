@@ -1,7 +1,5 @@
 package br.univille.microservsecretaria.aluno.entity;
 
-import java.util.UUID;
-
 import org.springframework.data.annotation.Id;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
@@ -17,7 +15,7 @@ public class Aluno {
     @Id
     @PartitionKey
     @GeneratedValue
-    private UUID id; 
+    private String id; 
 
     private String name;
 
