@@ -21,7 +21,7 @@ public class AlunoAPIController {
 
     @GetMapping
     public ResponseEntity<List<Aluno>> get(){
-        var listaAlunos = service.getAll();
+        List<Aluno> listaAlunos = service.getAll();
 
         return new ResponseEntity<List<Aluno>>(listaAlunos, HttpStatus.OK);
     }
