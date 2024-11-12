@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MicroservsecretariaApplication<microservsecretaria>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.univille.microservsecretaria.MicroservsecretariaApplication",
+            "projectName": "microservsecretaria",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": ["-Djavax.net.ssl.trustStore=/workspaces/tapr-2024-turmaa-secretaria-java/native.jks",
+                       "-Djavax.net.ssl.trustStorePassword=univille"]
+        }
+    ]
+}
