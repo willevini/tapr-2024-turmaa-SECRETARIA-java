@@ -7,6 +7,6 @@ import br.univille.microservsecretaria.aluno.entity.Aluno;
 
 @Repository
 public interface AlunoRepository 
-    extends CrudRepository<Aluno,String>{
+    extends CrudRepository<Aluno,String> {
     
 }
