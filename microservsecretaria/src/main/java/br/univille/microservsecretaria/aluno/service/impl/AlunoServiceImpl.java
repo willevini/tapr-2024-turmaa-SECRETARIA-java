@@ -2,6 +2,7 @@ package br.univille.microservsecretaria.aluno.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,26 @@ public class AlunoServiceImpl implements AlunoService {
     @Override
     public Aluno save(Aluno aluno) {
         return repository.save(aluno);
+    }
+
+    @Override
+    public Aluno update(String id, Aluno aluno) {
+        Optional<Aluno> alunoDB = repository.findById(id);
+        if (!alunoDB.isPresent()) return null;
+
+        Aluno alunoAtual = alunoDB.get();
+        alunoAtual.setName(aluno.getName());
+        repository.save(alunoAtual);
+
+        return alunoAtual;
+    }
+
+    @Override
+    public Aluno delete(String id) {
+        Optional<Aluno> alunoDB = repository.findById(id);
+        if (!alunoDB.isPresent()) return null;
+
+        repository.delete(alunoDB.get());
+        return alunoDB.get();
     }
 }
