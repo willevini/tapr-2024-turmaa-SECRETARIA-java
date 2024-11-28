@@ -1,5 +1,6 @@
 package br.univille.microservsecretaria.aluno.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.Id;
 
 import com.azure.spring.data.cosmos.core.mapping.Container;
@@ -15,6 +16,7 @@ public class Aluno {
     @Id
     @PartitionKey
     @GeneratedValue
+    @Schema(hidden = true)
     private String id; 
 
     private String name;
