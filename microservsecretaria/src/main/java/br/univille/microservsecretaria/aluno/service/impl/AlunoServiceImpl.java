@@ -36,7 +36,7 @@ public class AlunoServiceImpl implements AlunoService {
         if (!alunoDB.isPresent()) return null;
 
         Aluno alunoAtual = alunoDB.get();
-        alunoAtual.setName(aluno.getName());
+        alunoAtual.setNome(aluno.getNome());
         repository.save(alunoAtual);
 
         return alunoAtual;

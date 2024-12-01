@@ -1,23 +1,23 @@
 package br.univille.microservsecretaria.aluno.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.data.annotation.Id;
-
+import br.univille.microservsecretaria.comum.BaseEntity;
 import com.azure.spring.data.cosmos.core.mapping.Container;
-import com.azure.spring.data.cosmos.core.mapping.GeneratedValue;
-import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-
+import lombok.EqualsAndHashCode;
 import lombok.Data;
+import java.util.Date;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Container(containerName = "aluno", autoCreateContainer = true)
-public class Aluno {
+public class Aluno extends BaseEntity {
 
-    @Id
-    @PartitionKey
-    @GeneratedValue
-    @Schema(hidden = true)
-    private String id; 
+    private String matricula;
 
-    private String name;
+    private String nome;
+
+    private Date dataNascimento;
+
+    private Endereco endereco;
+
+    private String cpf;
 }
