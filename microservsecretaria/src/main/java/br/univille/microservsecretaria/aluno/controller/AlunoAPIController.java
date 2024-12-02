@@ -1,7 +1,10 @@
 package br.univille.microservsecretaria.aluno.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.univille.microservsecretaria.aluno.mapper.AlunoMapper;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.univille.microservsecretaria.aluno.dto.AlunoDTO;
 import br.univille.microservsecretaria.aluno.entity.Aluno;
 import br.univille.microservsecretaria.aluno.service.AlunoService;
 
@@ -24,31 +28,34 @@ public class AlunoAPIController {
     private AlunoService alunoService;
 
     @GetMapping
-    public ResponseEntity<List<Aluno>> get() {
+    public ResponseEntity<List<AlunoDTO>> get() {
         List<Aluno> listaAlunos = alunoService.getAll();
+        List<AlunoDTO> listaAlunosDTO = listaAlunos.stream()
+                .map(AlunoMapper::toDTO)
+                .collect(Collectors.toList());
 
-        return new ResponseEntity<>(listaAlunos, HttpStatus.OK);
+        return new ResponseEntity<>(listaAlunosDTO, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Aluno> post(@RequestBody Aluno aluno) {
-        if (aluno == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<AlunoDTO> post(@Valid @RequestBody AlunoDTO alunoDTO) {
+        if (alunoDTO == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        Aluno novoAluno = alunoService.save(aluno);
-        return new ResponseEntity<>(novoAluno, HttpStatus.CREATED);
+        Aluno novoAluno = alunoService.save(AlunoMapper.toEntity(alunoDTO));
+        return new ResponseEntity<>(AlunoMapper.toDTO(novoAluno), HttpStatus.CREATED);
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Aluno> update(@PathVariable("id") String id, @RequestBody Aluno aluno) {
-        if (aluno == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<AlunoDTO> update(@PathVariable("id") String id, @Valid @RequestBody AlunoDTO alunoDTO) {
+        if (alunoDTO == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        Aluno alunoAtualizado = alunoService.update(id, aluno);
-        return new ResponseEntity<>(alunoAtualizado, HttpStatus.OK);
+        Aluno alunoAtualizado = alunoService.update(id, AlunoMapper.toEntity(alunoDTO));
+        return new ResponseEntity<>(AlunoMapper.toDTO(alunoAtualizado), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Aluno> delete(@PathVariable("id") String id) {
+    public ResponseEntity<AlunoDTO> delete(@PathVariable("id") String id) {
         Aluno alunoDeletado = alunoService.delete(id);
-        return new ResponseEntity<>(alunoDeletado, HttpStatus.OK);
+        return new ResponseEntity<>(AlunoMapper.toDTO(alunoDeletado), HttpStatus.OK);
     }
 }

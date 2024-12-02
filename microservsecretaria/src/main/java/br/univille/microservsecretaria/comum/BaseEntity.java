@@ -2,6 +2,7 @@ package br.univille.microservsecretaria.comum;
 
 import com.azure.spring.data.cosmos.core.mapping.GeneratedValue;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,10 +17,6 @@ import java.util.Date;
 @Setter
 public abstract class BaseEntity {
 
-    public BaseEntity() {
-        this.versao += 1;
-    }
-
     @Id
     @PartitionKey
     @GeneratedValue
@@ -27,11 +24,13 @@ public abstract class BaseEntity {
     private String id;
 
     @CreatedDate
+    @Schema(hidden = true)
     private Date dataCriacao;
 
     @LastModifiedDate
-    private Date ultimaAtualizacao;
+    @Schema(hidden = true)
+    private Date dataAtualizacao;
 
-    @Version
-    private String versao;
+    @Schema(hidden = true)
+    private Long versao = 0L;
 }
