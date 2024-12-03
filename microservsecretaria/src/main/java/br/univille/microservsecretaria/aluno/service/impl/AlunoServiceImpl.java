@@ -37,8 +37,17 @@ public class AlunoServiceImpl implements AlunoService {
 
         Aluno alunoAtual = alunoDB.get();
         alunoAtual.setNome(aluno.getNome());
-        repository.save(alunoAtual);
+        alunoAtual.setDataNascimento(aluno.getDataNascimento());
+        alunoAtual.setCpf(aluno.getCpf());
+        alunoAtual.setRua(aluno.getRua());
+        alunoAtual.setNumero(aluno.getNumero());
+        alunoAtual.setComplemento(aluno.getComplemento());
+        alunoAtual.setBairro(aluno.getBairro());
+        alunoAtual.setCidade(aluno.getCidade());
+        alunoAtual.setEstado(aluno.getEstado());
+        alunoAtual.setCep(aluno.getCep());
 
+        repository.save(alunoAtual);
         return alunoAtual;
     }
 
