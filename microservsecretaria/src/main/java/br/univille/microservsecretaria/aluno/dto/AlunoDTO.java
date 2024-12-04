@@ -1,6 +1,6 @@
 package br.univille.microservsecretaria.aluno.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import br.univille.microservsecretaria.aluno.validation.ValidCpf;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -25,6 +25,7 @@ public class AlunoDTO {
 
     @NotNull(message = "CPF não pode ser nulo")
     @Size(min = 11, max = 11, message = "CPF deve ter 11 caracteres")
+    @ValidCpf()
     private String cpf;
 
     @NotNull(message = "Rua não pode ser nula")

@@ -1,10 +1,22 @@
-package br.univille.microservsecretaria.aluno.utils;
+package br.univille.microservsecretaria.aluno.validation;
 
-public class CpfUtils {
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
+public class CpfValidador implements ConstraintValidator<ValidCpf, String> {
 
     private static final Integer TAMANHO_CPF = 11;
 
-    public static Boolean validadorCpf(String cpf) {
+    @Override
+    public void initialize(ValidCpf constraintAnnotation) {
+    }
+
+    @Override
+    public boolean isValid(String cpf, ConstraintValidatorContext context) {
+        return validadorCpf(cpf);
+    }
+
+    private Boolean validadorCpf(String cpf) {
         // Remove todos os caracteres que não sejam dígitos
         cpf = cpf.replaceAll("\\D", "");
 
