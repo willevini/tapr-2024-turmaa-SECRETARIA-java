@@ -1,8 +1,10 @@
 package br.univille.microservsecretaria;
 
+import com.azure.spring.data.cosmos.core.mapping.EnableCosmosAuditing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@EnableCosmosAuditing
 @SpringBootApplication
 public class MicroservsecretariaApplication {
 

@@ -1,23 +1,41 @@
 package br.univille.microservsecretaria.aluno.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.data.annotation.Id;
-
+import br.univille.microservsecretaria.comum.BaseEntity;
 import com.azure.spring.data.cosmos.core.mapping.Container;
-import com.azure.spring.data.cosmos.core.mapping.GeneratedValue;
-import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.EqualsAndHashCode;
 import lombok.Data;
+import java.time.LocalDateTime;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Container(containerName = "aluno", autoCreateContainer = true)
-public class Aluno {
+public class Aluno extends BaseEntity {
 
-    @Id
-    @PartitionKey
-    @GeneratedValue
     @Schema(hidden = true)
-    private String id; 
+    private String matricula;
 
-    private String name;
+    private Curso curso;
+
+    private String nome;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+    private LocalDateTime dataNascimento;
+
+    private String cpf;
+
+    private String rua;
+
+    private String numero;
+
+    private String complemento;
+
+    private String bairro;
+
+    private String cidade;
+
+    private String estado;
+
+    private String cep;
 }

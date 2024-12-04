@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import br.univille.microservsecretaria.aluno.service.MatriculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class AlunoServiceImpl implements AlunoService {
     @Autowired
     private AlunoRepository repository;
 
+    @Autowired
+    private MatriculaService matriculaService;
+
     @Override
     public List<Aluno> getAll() {
         Iterable<Aluno> alunos = repository.findAll();
@@ -27,6 +31,8 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public Aluno save(Aluno aluno) {
+        String matricula = matriculaService.gerarMatricula(aluno.getCurso());
+        aluno.setMatricula(matricula);
         return repository.save(aluno);
     }
 
@@ -36,9 +42,19 @@ public class AlunoServiceImpl implements AlunoService {
         if (!alunoDB.isPresent()) return null;
 
         Aluno alunoAtual = alunoDB.get();
-        alunoAtual.setName(aluno.getName());
-        repository.save(alunoAtual);
+        alunoAtual.setNome(aluno.getNome());
+        alunoAtual.setCurso(aluno.getCurso());
+        alunoAtual.setDataNascimento(aluno.getDataNascimento());
+        alunoAtual.setCpf(aluno.getCpf());
+        alunoAtual.setRua(aluno.getRua());
+        alunoAtual.setNumero(aluno.getNumero());
+        alunoAtual.setComplemento(aluno.getComplemento());
+        alunoAtual.setBairro(aluno.getBairro());
+        alunoAtual.setCidade(aluno.getCidade());
+        alunoAtual.setEstado(aluno.getEstado());
+        alunoAtual.setCep(aluno.getCep());
 
+        repository.save(alunoAtual);
         return alunoAtual;
     }
 
