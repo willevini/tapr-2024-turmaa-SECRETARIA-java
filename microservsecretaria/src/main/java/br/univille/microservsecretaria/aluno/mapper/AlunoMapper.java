@@ -2,12 +2,12 @@ package br.univille.microservsecretaria.aluno.mapper;
 
 import br.univille.microservsecretaria.aluno.dto.AlunoDTO;
 import br.univille.microservsecretaria.aluno.entity.Aluno;
+import br.univille.microservsecretaria.aluno.entity.Curso;
 
 public class AlunoMapper {
 
     public static AlunoDTO toDTO(Aluno aluno) {
         AlunoDTO dto = new AlunoDTO();
-        dto.setMatricula(aluno.getMatricula());
         dto.setNome(aluno.getNome());
         dto.setDataNascimento(aluno.getDataNascimento());
         dto.setCpf(aluno.getCpf());
@@ -21,9 +21,9 @@ public class AlunoMapper {
         return dto;
     }
 
-    public static Aluno toEntity(AlunoDTO dto) {
+    public static Aluno toEntity(AlunoDTO dto, Curso curso) {
         Aluno aluno = new Aluno();
-        aluno.setMatricula(dto.getMatricula());
+        aluno.setCurso(curso);
         aluno.setNome(dto.getNome());
         aluno.setDataNascimento(dto.getDataNascimento());
         aluno.setCpf(dto.getCpf());

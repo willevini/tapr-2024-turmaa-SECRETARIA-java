@@ -2,10 +2,11 @@ package br.univille.microservsecretaria.aluno.entity;
 
 import br.univille.microservsecretaria.comum.BaseEntity;
 import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Data;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -19,7 +20,8 @@ public class Aluno extends BaseEntity {
 
     private String nome;
 
-    private Date dataNascimento;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+    private LocalDateTime dataNascimento;
 
     private String cpf;
 

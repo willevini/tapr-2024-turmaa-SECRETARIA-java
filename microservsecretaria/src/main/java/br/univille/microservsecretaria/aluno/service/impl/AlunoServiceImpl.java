@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import br.univille.microservsecretaria.aluno.service.MatriculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class AlunoServiceImpl implements AlunoService {
     @Autowired
     private AlunoRepository repository;
 
+    @Autowired
+    private MatriculaService matriculaService;
+
     @Override
     public List<Aluno> getAll() {
         Iterable<Aluno> alunos = repository.findAll();
@@ -27,6 +31,8 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public Aluno save(Aluno aluno) {
+        String matricula = matriculaService.gerarMatricula(aluno.getCurso());
+        aluno.setMatricula(matricula);
         return repository.save(aluno);
     }
 
@@ -37,6 +43,7 @@ public class AlunoServiceImpl implements AlunoService {
 
         Aluno alunoAtual = alunoDB.get();
         alunoAtual.setNome(aluno.getNome());
+        alunoAtual.setCurso(aluno.getCurso());
         alunoAtual.setDataNascimento(aluno.getDataNascimento());
         alunoAtual.setCpf(aluno.getCpf());
         alunoAtual.setRua(aluno.getRua());

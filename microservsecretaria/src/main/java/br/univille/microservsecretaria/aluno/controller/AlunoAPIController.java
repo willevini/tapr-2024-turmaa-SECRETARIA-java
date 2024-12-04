@@ -3,7 +3,9 @@ package br.univille.microservsecretaria.aluno.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.univille.microservsecretaria.aluno.entity.Curso;
 import br.univille.microservsecretaria.aluno.mapper.AlunoMapper;
+import br.univille.microservsecretaria.aluno.repository.CursoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,9 @@ public class AlunoAPIController {
     @Autowired
     private AlunoService alunoService;
 
+    @Autowired
+    private CursoRepository cursoRepository;
+
     @GetMapping
     public ResponseEntity<List<AlunoDTO>> get() {
         List<Aluno> listaAlunos = alunoService.getAll();
@@ -38,18 +43,25 @@ public class AlunoAPIController {
     }
 
     @PostMapping
-    public ResponseEntity<AlunoDTO> post(@Valid @RequestBody AlunoDTO alunoDTO) {
+    public ResponseEntity<?> post(@Valid @RequestBody AlunoDTO alunoDTO) {
         if (alunoDTO == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        Aluno novoAluno = alunoService.save(AlunoMapper.toEntity(alunoDTO));
+        Curso curso = cursoRepository.findByCodigo(alunoDTO.getCodigoCurso());
+        if (curso == null) return new ResponseEntity<>("Curso não encontrado", HttpStatus.BAD_REQUEST);
+
+
+        Aluno novoAluno = alunoService.save(AlunoMapper.toEntity(alunoDTO, curso));
         return new ResponseEntity<>(AlunoMapper.toDTO(novoAluno), HttpStatus.CREATED);
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<AlunoDTO> update(@PathVariable("id") String id, @Valid @RequestBody AlunoDTO alunoDTO) {
+    public ResponseEntity<?> update(@PathVariable("id") String id, @Valid @RequestBody AlunoDTO alunoDTO) {
         if (alunoDTO == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        Aluno alunoAtualizado = alunoService.update(id, AlunoMapper.toEntity(alunoDTO));
+        Curso curso = cursoRepository.findByCodigo(alunoDTO.getCodigoCurso());
+        if (curso == null) return new ResponseEntity<>("Curso não encontrado", HttpStatus.BAD_REQUEST);
+
+        Aluno alunoAtualizado = alunoService.update(id, AlunoMapper.toEntity(alunoDTO, curso));
         return new ResponseEntity<>(AlunoMapper.toDTO(alunoAtualizado), HttpStatus.OK);
     }
 
