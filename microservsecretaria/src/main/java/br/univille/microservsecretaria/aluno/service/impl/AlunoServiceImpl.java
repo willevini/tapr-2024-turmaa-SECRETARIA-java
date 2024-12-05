@@ -66,4 +66,9 @@ public class AlunoServiceImpl implements AlunoService {
         repository.delete(alunoDB.get());
         return alunoDB.get();
     }
+
+    public Aluno getAlunoById(String id) {
+        Optional<Aluno> alunoDB = repository.findById(id);
+        return alunoDB.orElse(null);
+    }
 }
