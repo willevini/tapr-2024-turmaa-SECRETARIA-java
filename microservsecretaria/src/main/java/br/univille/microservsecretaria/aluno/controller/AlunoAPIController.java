@@ -3,9 +3,9 @@ package br.univille.microservsecretaria.aluno.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.univille.microservsecretaria.aluno.entity.Curso;
+import br.univille.microservsecretaria.comum.entity.Curso;
 import br.univille.microservsecretaria.aluno.mapper.AlunoMapper;
-import br.univille.microservsecretaria.aluno.repository.CursoRepository;
+import br.univille.microservsecretaria.comum.repository.CursoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

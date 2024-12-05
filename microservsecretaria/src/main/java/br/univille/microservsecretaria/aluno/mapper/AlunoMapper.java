@@ -2,7 +2,7 @@ package br.univille.microservsecretaria.aluno.mapper;
 
 import br.univille.microservsecretaria.aluno.dto.AlunoDTO;
 import br.univille.microservsecretaria.aluno.entity.Aluno;
-import br.univille.microservsecretaria.aluno.entity.Curso;
+import br.univille.microservsecretaria.comum.entity.Curso;
 
 public class AlunoMapper {
 

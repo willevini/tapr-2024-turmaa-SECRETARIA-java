@@ -1,6 +1,6 @@
-package br.univille.microservsecretaria.aluno.repository;
+package br.univille.microservsecretaria.comum.repository;
 
-import br.univille.microservsecretaria.aluno.entity.Curso;
+import br.univille.microservsecretaria.comum.entity.Curso;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

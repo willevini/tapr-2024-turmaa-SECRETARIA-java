@@ -1,4 +1,4 @@
-package br.univille.microservsecretaria.aluno.entity;
+package br.univille.microservsecretaria.comum.entity;
 
 import br.univille.microservsecretaria.comum.BaseEntity;
 import com.azure.spring.data.cosmos.core.mapping.Container;
