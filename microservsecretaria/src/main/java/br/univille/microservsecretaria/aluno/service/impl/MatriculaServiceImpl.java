@@ -1,6 +1,6 @@
 package br.univille.microservsecretaria.aluno.service.impl;
 
-import br.univille.microservsecretaria.aluno.entity.Curso;
+import br.univille.microservsecretaria.comum.entity.Curso;
 import br.univille.microservsecretaria.aluno.repository.AlunoRepository;
 import br.univille.microservsecretaria.aluno.service.MatriculaService;
 import org.springframework.beans.factory.annotation.Autowired;

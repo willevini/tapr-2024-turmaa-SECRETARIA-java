@@ -1,6 +1,7 @@
 package br.univille.microservsecretaria.aluno.entity;
 
 import br.univille.microservsecretaria.comum.BaseEntity;
+import br.univille.microservsecretaria.comum.entity.Curso;
 import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;

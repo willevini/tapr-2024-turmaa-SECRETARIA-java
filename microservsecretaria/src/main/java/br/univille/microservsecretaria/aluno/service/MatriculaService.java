@@ -1,6 +1,6 @@
 package br.univille.microservsecretaria.aluno.service;
 
-import br.univille.microservsecretaria.aluno.entity.Curso;
+import br.univille.microservsecretaria.comum.entity.Curso;
 
 public interface MatriculaService {
 

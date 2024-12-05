@@ -12,4 +12,6 @@ public interface AlunoRepository extends CrudRepository<Aluno, String> {
 
     @Query("SELECT VALUE COUNT(1) FROM c WHERE c.curso.codigo = @cursoCodigo AND c.dataCriacao >= @startDate AND c.dataCriacao < @endDate")
     long countByCursoAndDataCriacao(@Param("cursoCodigo") String cursoCodigo, @Param("startDate") String startDate, @Param("endDate") String endDate);
+
+    Aluno findByMatricula(String matriculaAluno);
 }
