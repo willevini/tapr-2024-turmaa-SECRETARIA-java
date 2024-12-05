@@ -1,5 +1,6 @@
 package br.univille.microservsecretaria.servicosAcademicos.historicoEscolar.service.impl;
 
+import br.univille.microservsecretaria.aluno.entity.Aluno;
 import br.univille.microservsecretaria.aluno.service.MatriculaService;
 import br.univille.microservsecretaria.servicosAcademicos.historicoEscolar.entity.HistoricoEscolar;
 import br.univille.microservsecretaria.servicosAcademicos.historicoEscolar.repository.HistoricoEscolarRepository;
@@ -52,6 +53,10 @@ public class HistoricoEscolarServiceImpl implements HistoricoEscolarService {
 
     @Override
     public HistoricoEscolar delete(String id) {
-        return null;
+        Optional<HistoricoEscolar> historicoEscolarDB = repository.findById(id);
+        if (!historicoEscolarDB.isPresent()) return null;
+
+        repository.delete(historicoEscolarDB.get());
+        return historicoEscolarDB.get();
     }
 }
